@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="A practical workspace for planning, drafting and organizing digital products.">
+  <meta name="theme-color" content="#101827">
+  <title>ProductPilot — Digital Product Autopilot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="ProductPilot home"><span class="brand-mark">P</span><span>product<span class="brand-light">pilot</span><small>DIGITAL PRODUCT STUDIO</small></span></a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="nav">
+        <button class="nav-link active" data-view="overview"><span>◫</span> Overview</button>
+        <button class="nav-link" data-view="create"><span>✳</span> Product builder</button>
+        <button class="nav-link" data-view="library"><span>▤</span> Product library <b id="nav-count">0</b></button>
+      </nav>
+      <div class="sidebar-bottom"><div class="status-dot"></div><div><strong>Local workspace</strong><small>Your drafts stay in this browser</small></div></div>
+    </aside>
+    <main class="main">
+      <header class="topbar"><div class="breadcrumb">Workspace <span>/</span> <strong id="crumb">Overview</strong></div><div class="top-actions"><span class="local-pill"><i></i> MVP · Local mode</span><div class="avatar">PP</div></div></header>
+      <section class="view active" id="view-overview">
+        <div class="welcome"><div><div class="eyebrow">YOUR DIGITAL PRODUCT WORKSPACE</div><h1>Turn ideas into <em>product plans.</em></h1><p>Shape a rough idea into a clear, organized digital product brief.</p></div><button class="primary-btn" data-go="create">＋ Create a product</button></div>
+        <div class="stats-grid">
+          <article class="stat-card"><span class="stat-icon violet">▤</span><div class="stat-label">Products created</div><div class="stat-number" id="stat-total">0</div><div class="stat-note">Saved in this browser</div></article>
+          <article class="stat-card"><span class="stat-icon green">✓</span><div class="stat-label">Ready to develop</div><div class="stat-number" id="stat-ready">0</div><div class="stat-note">Briefs with an idea and audience</div></article>
+          <article class="stat-card"><span class="stat-icon amber">↗</span><div class="stat-label">Last activity</div><div class="stat-number compact" id="stat-last">—</div><div class="stat-note">Most recent saved draft</div></article>
+        </div>
+        <div class="section-heading"><div><h2>Recent products</h2><p>Your latest product briefs, all in one place.</p></div><button class="text-btn" data-go="library">View library →</button></div>
+        <div class="product-grid" id="recent-grid"></div>
+        <div class="empty-state" id="recent-empty"><div class="empty-icon">✳</div><h3>Your product studio is ready</h3><p>Create your first product brief to start building your library.</p><button class="secondary-btn" data-go="create">Build your first product</button></div>
+        <div class="disclaimer"><strong>What this MVP does:</strong> creates structured product briefs using built-in templates and saves them in your browser. AI generation, live market research and cloud sync are not connected yet.</div>
+      </section>
+      <section class="view" id="view-create">
+        <div class="page-heading"><div class="eyebrow">PRODUCT WORKSHOP</div><h1>Build a product brief</h1><p>Start with the idea. ProductPilot will organize it into a practical first draft.</p></div>
+        <form id="product-form" class="builder-layout">
+          <div class="form-panel">
+            <div class="panel-title"><span class="step">01</span><div><h2>Product foundation</h2><p>Define what you're creating and who it's for.</p></div></div>
+            <label for="product-name">Product name <span>*</span></label><input id="product-name" name="name" placeholder="e.g. Local SEO Starter Kit" required maxlength="80">
+            <label for="product-type">Product format <span>*</span></label><select id="product-type" name="type" required><option value="Template">Template / Toolkit</option><option value="E-book">E-book / Guide</option><option value="Software">Software / Micro-app</option><option value="Course">Online course</option><option value="Service">Productized service</option><option value="Other">Other digital product</option></select>
+            <label for="audience">Target audience <span>*</span></label><input id="audience" name="audience" placeholder="e.g. Freelance web designers" required maxlength="120">
+            <label for="problem">Problem to solve <span>*</span></label><textarea id="problem" name="problem" rows="3" placeholder="What frustrating task or problem does this product address?" required maxlength="500"></textarea>
+            <label for="outcome">Main customer outcome</label><textarea id="outcome" name="outcome" rows="2" placeholder="What will customers be able to do after using it?" maxlength="300"></textarea>
+          </div>
+          <div class="form-panel">
+            <div class="panel-title"><span class="step">02</span><div><h2>Positioning & delivery</h2><p>Add useful context for your product plan.</p></div></div>
+            <label for="features">Key features <small>One feature per line</small></label><textarea id="features" name="features" rows="5" placeholder="Step-by-step workflow&#10;Ready-to-use templates&#10;Quick-start instructions"></textarea>
+            <label for="price">Planned price (optional)</label><div class="price-input"><span>₹</span><input id="price" name="price" type="number" min="0" step="1" placeholder="e.g. 999"></div>
+            <label for="notes">Additional notes</label><textarea id="notes" name="notes" rows="4" placeholder="Differentiators, delivery format, constraints…"></textarea>
+            <div class="form-actions"><button type="button" class="secondary-btn" id="clear-form">Clear form</button><button type="submit" class="primary-btn">Generate product brief ↗</button></div>
+          </div>
+        </form>
+      </section>
+      <section class="view" id="view-library">
+        <div class="page-heading"><div class="eyebrow">YOUR WORKSPACE</div><h1>Product library</h1><p>Search, open, export or remove your saved product briefs.</p></div>
+        <div class="library-toolbar"><div class="search-box"><span>⌕</span><input id="library-search" placeholder="Search products…"></div><select id="type-filter"><option value="">All formats</option><option>Template</option><option>E-book</option><option>Software</option><option>Course</option><option>Service</option><option>Other</option></select></div>
+        <div class="product-grid" id="library-grid"></div><div class="empty-state" id="library-empty"><div class="empty-icon">▤</div><h3>No products found</h3><p>Create a product brief or adjust your search.</p><button class="secondary-btn" data-go="create">Create a product</button></div>
+      </section>
+    </main>
+  </div>
+  <div class="modal-backdrop" id="detail-modal" aria-hidden="true"><div class="detail-modal" role="dialog" aria-modal="true" aria-labelledby="detail-title"><button class="modal-close" id="modal-close" aria-label="Close">×</button><div id="detail-content"></div></div></div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body></html>
